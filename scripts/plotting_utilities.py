@@ -1,5 +1,6 @@
 import pathlib
 
+import inflection as inflection
 import matplotlib.font_manager as fm
 import matplotlib.pyplot as plt
 import numpy as np
@@ -7,9 +8,9 @@ import pandas as pd
 from matplotlib.path import Path
 from matplotlib.textpath import TextToPath
 
-from scripts.constants import PRIMARY_DATE_COL
+from constants import PRIMARY_DATE_COL
 
-SYMBOLA_PATH = r"C:\Users\milly\AppData\Local\Microsoft\Windows\Fonts\Symbola-AjYx.ttf"
+SYMBOLA_PATH = "/mnt/c/Users/milly/AppData/Local/Microsoft/Windows/Fonts/Symbola-AjYx.ttf"
 SYMBOLS = {"bee": "\U0001F41D"}
 font_properties = fm.FontProperties(fname=SYMBOLA_PATH)
 
@@ -58,4 +59,5 @@ def plot_numerical_data(
     plt.ylabel("count")
     plt.title(f"{title} for {hive.title()}")
     plt.tight_layout()
-    plt.savefig(output_directory / f"{hive}_{title}.png")
+    figure_title = f"{hive}_{title}.png".lower().replace(' ', '_')
+    plt.savefig(output_directory / figure_title)

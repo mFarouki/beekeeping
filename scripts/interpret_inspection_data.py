@@ -13,12 +13,12 @@ from constants import (
 )
 from matplotlib.path import Path
 
-from scripts.plotting_utilities import plot_numerical_data
+from plotting_utilities import plot_numerical_data
 
 SCRIPT_PATH = os.path.dirname(os.path.realpath(__file__))
 FRAME_KEYWORDS = ["dn4", "sn4"]
-IMAGES_PATH = SCRIPT_PATH / "imgs"
-IMAGES_PATH.mkdir()
+IMAGES_PATH = pathlib.Path(SCRIPT_PATH) / "imgs"
+IMAGES_PATH.mkdir(exist_ok=True)
 
 
 def read_data(filepath: Path) -> pd.DataFrame:
@@ -39,9 +39,10 @@ def check_data(df: pd.DataFrame) -> None:
     ), f"hives must be one of: {', '.join(HIVES)}"
 
 
-@click.option("--input-csv", type=click.Path(), default=pathlib.Path("../data/sample_hive_inspection.csv"))
-def interpret_inspection_data(input_csv):
-    df = read_data(input_csv)
+@click.command()
+@click.option("--data", type=click.Path(), default=pathlib.Path("../data/sample_hive_inspection.csv"))
+def interpret_inspection_data(data):
+    df = read_data(data)
     check_data(df)
     frame_data = [
         column
