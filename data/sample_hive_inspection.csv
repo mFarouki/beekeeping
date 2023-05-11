@@ -1,5 +1,5 @@
-hive,inspection_date,temperament,brood_boxes,supers,dn4_brood,dn4_stores,sn4_brood,sn4_stores,eggs,larvae,drones,queen_cells,queen_found
-"The Beehamas",29-07-2022,5,1,1,3,2,3,2,true,true,true,false,true
-"The Beehamas",07-08-2022,1,1,2,4,5,2,1,true,true,false,false,false
-"The Beehamas",14-08-2022,3,1,1,5,7,1,8,true,false,false,false,true
-"The Beehamas",21-08-2022,4,1,2,4,5,2,1,false,true,true,true,false
+hive,queen,inspection_date,temperament,brood_boxes,supers,dn4_brood,dn4_stores,sn4_brood,sn4_stores,eggs,larvae,drones,queen_cells,queen_found
+"the beehamas","",29-07-2022,5,1,1,3,2,3,2,true,true,true,false,true
+"the beehamas","",07-08-2022,1,1,2,4,5,2,1,true,true,false,false,false
+"the beehamas","",14-08-2022,3,1,1,5,7,1,8,true,false,false,false,true
+"the beehamas","",21-08-2022,4,1,2,4,5,2,1,false,true,true,true,false

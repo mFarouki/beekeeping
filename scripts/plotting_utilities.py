@@ -1,16 +1,16 @@
 import pathlib
 
-import inflection as inflection
 import matplotlib.font_manager as fm
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+from constants import HIVE, PRIMARY_DATE_COL
 from matplotlib.path import Path
 from matplotlib.textpath import TextToPath
 
-from constants import PRIMARY_DATE_COL
-
-SYMBOLA_PATH = "/mnt/c/Users/milly/AppData/Local/Microsoft/Windows/Fonts/Symbola-AjYx.ttf"
+SYMBOLA_PATH = (
+    "/mnt/c/Users/milly/AppData/Local/Microsoft/Windows/Fonts/Symbola-AjYx.ttf"
+)
 SYMBOLS = {"bee": "\U0001F41D"}
 font_properties = fm.FontProperties(fname=SYMBOLA_PATH)
 
@@ -29,12 +29,31 @@ def get_marker_as_path(symbol):
     return Path(v - mean, codes, closed=False)
 
 
-def plot_numerical_data(
-    dataframe: pd.DataFrame, hive: str, title: str, output_directory: pathlib.Path
+def set_legend(axes, n_items: int):
+    legend = axes.legend()
+    for legend_index in range(n_items):
+        legend.legendHandles[legend_index]._sizes = [30]
+
+
+def format_plot(title: str, hive: str):
+    plt.xticks(rotation=45)
+    plt.ylabel("count")
+    plt.title(f"{title} for {hive.title()}")
+    plt.tight_layout()
+
+
+def plot_numerical_data(dataframe: pd.DataFrame, output_directory: pathlib.Path):
+    for hive in dataframe[HIVE].unique():
+        plot_numerical_data_by_hive(dataframe, hive, output_directory)
+
+
+def plot_numerical_data_by_hive(
+    dataframe: pd.DataFrame, hive: str, output_directory: pathlib.Path
 ):
     hive_df = dataframe[dataframe["hive"].str.lower() == hive.lower()]
     numerical_values = hive_df.select_dtypes(include=np.number)
     colormap = partition_colormap("Wistia", numerical_values.shape[1])
+    title = "Frame Data"
 
     ax = None
     plot_count = 0
@@ -54,10 +73,7 @@ def plot_numerical_data(
         else:
             hive_df.plot(ax=ax, **shared_arguments)
         plot_count += 1
-    ax.legend(loc="upper left")
-    plt.xticks(rotation=45)
-    plt.ylabel("count")
-    plt.title(f"{title} for {hive.title()}")
-    plt.tight_layout()
-    figure_title = f"{hive}_{title}.png".lower().replace(' ', '_')
+    set_legend(ax, numerical_values.shape[1])
+    format_plot(title, hive)
+    figure_title = f"{hive}_{title}.png".lower().replace(" ", "_")
     plt.savefig(output_directory / figure_title)

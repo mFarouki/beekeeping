@@ -1,2 +1,4 @@
-hive,inspection_date,temperament,brood_boxes,supers,dn4_brood,dn4_stores,sn4_brood,sn4_stores,eggs,larvae,drones,queen_cells,queen_found
-"mozambeeque",22-04-2023,4,1,3,5,0,4,20,true,true,true,true, true
+hive,queen,inspection_date,temperament,brood_boxes,supers,dn4_brood,dn4_stores,sn4_brood,sn4_stores,eggs,larvae,drones,queen_cells,queen_found
+"mozambeeque","graça",22-04-2023,4,1,3,5,0,4,20,true,true,true,true,true
+"mozambeeque","graça",07-05-2023,5,1,3,6,2,0,20,true,true,true,true,false
+"mozambeeque","graça",11-05-2023,5,1,3,7,2,0,20,true,true,true,true,true

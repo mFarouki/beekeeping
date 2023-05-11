@@ -3,16 +3,9 @@ import pathlib
 
 import click
 import pandas as pd
-from constants import (
-    DATE_COLS,
-    HIVE,
-    HIVES,
-    INSPECTION_HEADER,
-    PRIMARY_DATE_COL,
-    TEMPERAMENT,
-)
+from constants import (DATE_COLS, HIVE, HIVES, INSPECTION_HEADER,
+                       PRIMARY_DATE_COL, TEMPERAMENT)
 from matplotlib.path import Path
-
 from plotting_utilities import plot_numerical_data
 
 SCRIPT_PATH = os.path.dirname(os.path.realpath(__file__))
@@ -40,7 +33,11 @@ def check_data(df: pd.DataFrame) -> None:
 
 
 @click.command()
-@click.option("--data", type=click.Path(), default=pathlib.Path("../data/sample_hive_inspection.csv"))
+@click.option(
+    "--data",
+    type=click.Path(),
+    default=pathlib.Path("../data/sample_hive_inspection.csv"),
+)
 def interpret_inspection_data(data):
     df = read_data(data)
     check_data(df)
@@ -50,9 +47,7 @@ def interpret_inspection_data(data):
         if any(keyword in column for keyword in FRAME_KEYWORDS)
     ]
     frame_data.extend([PRIMARY_DATE_COL, HIVE])
-    plot_numerical_data(
-        df[frame_data], "the beehamas", "Frame Data", IMAGES_PATH
-    )
+    plot_numerical_data(df[frame_data], IMAGES_PATH)
 
 
 if __name__ == "__main__":

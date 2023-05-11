@@ -6,6 +6,7 @@ HIVES = ["mozambeeque", "new beeland", "the beehamas", "puerto beeco"]
 INSPECTION_HEADER = {
     HIVE: str,
     TEMPERAMENT: int,
+    "queen": str,
     "brood_boxes": int,
     "supers": int,
     "dn4_brood": int,
